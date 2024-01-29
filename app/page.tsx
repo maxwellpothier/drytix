@@ -2,6 +2,8 @@
 import ContactForm from "@/components/ContactForm";
 import {useForm} from "react-hook-form";
 // import Image from "next/image";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type FormValues = {
 	name: string;
@@ -18,7 +20,7 @@ export default function Home() {
 
 	return (
 		<div className="w-full flex justify-center">
-			<div className="flex flex-col items-center mt-24 w-9/12">
+			<div className="flex flex-col items-center mt-24 w-10/12 max-w-3xl">
 				<h1 className="text-4xl mb-8">DryTix</h1>
 				<p className="text-l mb-4">
 					Hey Clean Team, meet DryTix - your digital sidekick in the
@@ -56,6 +58,7 @@ export default function Home() {
 					/>
 				</div> */}
 			</div>
+			<ToastContainer />
 		</div>
 	);
 }
