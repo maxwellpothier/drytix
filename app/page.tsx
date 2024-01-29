@@ -1,9 +1,63 @@
+"use client";
+import ContactForm from "@/components/ContactForm";
+import {useForm} from "react-hook-form";
+import Image from "next/image";
+
+type FormValues = {
+	name: string;
+	email: string;
+	phone: string;
+};
+
 export default function Home() {
+	const {handleSubmit, register} = useForm<FormValues>();
+
+	const onSubmit = (data: object) => {
+		console.log(data);
+	};
+
 	return (
-		<div className="flex justify-center">
-			<h1 className="text-center text-4xl" style={{marginTop: "100px"}}>
-				DryTix by BYU Students
-			</h1>
+		<div className="w-full flex justify-center">
+			<div className="flex flex-col items-center mt-24 w-9/12">
+				<h1 className="text-4xl mb-8">DryTix</h1>
+				<p className="text-l mb-4">
+					Hey Clean Team, meet DryTix - your digital sidekick in the
+					world of dry cleaning! We&apos;re not just an upgrade;
+					we&apos;re a game-changer for your business.
+				</p>
+				<p className="text-l mb-6">
+					Imagine a world where paper tickets are a thing of the past,
+					and your operations run smoother than ever. DryTix is your
+					high-tech toolkit, streamlining processes, managing orders,
+					and bringing a touch of digital magic to your storefront.
+					With real-time tracking, customer satisfaction soars.
+				</p>
+				<p className="text-l mb-6">
+					Join the future of dry cleaning with DryTix - because your
+					success deserves an upgrade!
+				</p>
+				<p className="text-l mb-10">
+					Here&apos;s the{" "}
+					<a
+						href="https://docs.google.com/forms/d/e/1FAIpQLSczbDFNH5rrcqK0q4cyIQXbuQE8zH0m40EiHkOSzBbgRwH8oA/viewform"
+						target="_blank"
+						className="text-blue-600">
+						form
+					</a>
+					.
+				</p>
+				<ContactForm />
+				{/* <div className="flex mt-10">
+					<Image
+						src="/img/dry-clean.jpeg"
+						width={500}
+						height={100}
+						alt="hero"
+					/>
+				</div> */}
+			</div>
 		</div>
 	);
 }
+
+// $drytix$2024
