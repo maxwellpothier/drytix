@@ -1,7 +1,7 @@
 "use client";
 import ContactForm from "@/components/ContactForm";
 import {useForm} from "react-hook-form";
-import Image from "next/image";
+// import Image from "next/image";
 
 type FormValues = {
 	name: string;
@@ -59,5 +59,3 @@ export default function Home() {
 		</div>
 	);
 }
-
-// $drytix$2024

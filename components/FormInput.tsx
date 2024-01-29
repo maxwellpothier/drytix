@@ -15,7 +15,6 @@ const FormInput: React.FC<FormInputProps> = ({label, name, type, hookForm}) => {
 				className="rounded p-1 w-72"
 				type={type}
 				id={name}
-				x
 				{...hookForm.register(name)}
 			/>
 		</div>
