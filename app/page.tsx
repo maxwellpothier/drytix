@@ -39,14 +39,14 @@ export default function Home() {
 					success deserves an upgrade!
 				</p>
 				<p className="text-l mb-10">
-					Here&apos;s the{" "}
+					Please fill out this
 					<a
 						href="https://docs.google.com/forms/d/e/1FAIpQLSczbDFNH5rrcqK0q4cyIQXbuQE8zH0m40EiHkOSzBbgRwH8oA/viewform"
 						target="_blank"
 						className="text-blue-600">
 						form
 					</a>
-					.
+					to help us understand your needs and how we can help you!
 				</p>
 				<ContactForm />
 				{/* <div className="flex mt-10">
