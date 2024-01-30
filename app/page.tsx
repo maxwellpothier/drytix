@@ -23,7 +23,7 @@ export default function Home() {
 
 	return (
 		<div className="w-full flex justify-center">
-			<div className="flex flex-col items-center mt-24 w-10/12 max-w-3xl">
+			<div className="flex flex-col items-center mt-20 w-10/12 max-w-3xl">
 				<Image className="w-20 h-20 z-20" src={logo} alt="" />
 				<h1 className="text-4xl mb-8">DryTix</h1>
 				<p className="text-l mb-4">
