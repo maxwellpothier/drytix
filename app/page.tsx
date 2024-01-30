@@ -42,16 +42,19 @@ export default function Home() {
 					Join the future of dry cleaning with DryTix - because your
 					success deserves an upgrade!
 				</p>
-				<p className="text-l mb-10">
+				<p className="text-l mb-6">
 					Please fill out this{" "}
 					<a
 						href="https://docs.google.com/forms/d/e/1FAIpQLSczbDFNH5rrcqK0q4cyIQXbuQE8zH0m40EiHkOSzBbgRwH8oA/viewform"
 						target="_blank"
-						className="text-blue-600">
+						className="text-blue-600 underline">
 						form
 					</a>{" "}
 					to help us understand how to create the most useful product!
 				</p>
+				<a className="mb-10 text-blue-600 underline" href="/team">
+					Meet the team!
+				</a>
 				<ContactForm />
 				{/* <div className="flex mt-10">
 					<Image

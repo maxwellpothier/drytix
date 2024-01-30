@@ -8,6 +8,9 @@ const TeamPage = () => {
 			<div className="flex flex-col items-center mt-16 w-10/12 max-w-3xl">
 				<Image className="w-20 h-20 z-20" src={logo} alt="" />
 				<h1 className="text-4xl mb-8">Meet the Team!</h1>
+				<a className="mb-10 text-blue-600 underline" href="/">
+					Back Home
+				</a>
 				<div className="grid grid-cols-3 gap-10 ml-10">
 					<AboutMe
 						picture={"/img/max.jpg"}
