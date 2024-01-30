@@ -6,7 +6,7 @@ import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import logo from "../public/img/Dry.png";
-import clothes from "../public/img/dry-clean.jpeg";
+// import clothes from "../public/img/dry-clean.jpeg";
 
 type FormValues = {
 	name: string;
