@@ -4,14 +4,14 @@ import React from "react";
 type AboutMeProps = {
   picture: StaticImageData;
   name: string;
-  major: string;
+  statement: string;
   hometown: string;
 };
 
 const AboutMe: React.FC<AboutMeProps> = ({
   picture,
   name,
-  major,
+  statement,
   hometown,
 }) => {
   const containerStyle: React.CSSProperties = {
@@ -47,7 +47,7 @@ const AboutMe: React.FC<AboutMeProps> = ({
       <div className="details-container">
         <h2>{name}</h2>
         <p>
-          <strong>Major:</strong> {major}
+          <strong>Statement:</strong> {statement}
         </p>
         <p>
           <strong>Hometown:</strong> {hometown}
