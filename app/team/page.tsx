@@ -15,7 +15,9 @@ const TeamPage = () => {
 					<AboutMe
 						picture={"/img/tanner.JPG"}
 						name={"Tanner Manwaring (CEO)"}
-						statement={"Hey Everyone! I'm an applied physics major at Brigham Young University with minors in computer science and Spanish. I love to play sports and go skiing."}
+						statement={
+							"Hey Everyone! I'm an applied physics major at Brigham Young University with minors in computer science and Spanish. I love to play sports and go skiing."
+						}
 						hometown={"Draper, UT"}
 					/>
 					<AboutMe
@@ -27,7 +29,9 @@ const TeamPage = () => {
 					<AboutMe
 						picture={"/img/max.jpg"}
 						name={"Max Pothier (CMO)"}
-						statement={""}
+						statement={
+							"I am a Computer Science major at Brigham Young University with a passion for music, sports, and building things!"
+						}
 						hometown={"Gilbert, AZ"}
 					/>
 				</div>
