@@ -5,8 +5,8 @@ import {useForm} from "react-hook-form";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
-import logo from "../public/img/Dry.png"
-import clothes from "../public/img/dry-clean.jpeg"
+import logo from "../public/img/Dry.png";
+import clothes from "../public/img/dry-clean.jpeg";
 
 type FormValues = {
 	name: string;
@@ -24,7 +24,7 @@ export default function Home() {
 	return (
 		<div className="w-full flex justify-center">
 			<div className="flex flex-col items-center mt-24 w-10/12 max-w-3xl">
-				<Image className="w-20 h-20 z-20" src={logo} alt=""/>
+				<Image className="w-20 h-20 z-20" src={logo} alt="" />
 				<h1 className="text-4xl mb-8">DryTix</h1>
 				<p className="text-l mb-4">
 					Hey Clean Team, meet DryTix - your digital sidekick in the
