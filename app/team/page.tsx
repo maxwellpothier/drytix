@@ -15,8 +15,8 @@ const TeamPage = () => {
 					<AboutMe
 						picture={"/img/max.jpg"}
 						name={"Tanner Manwaring (CEO)"}
-						statement={""}
-						hometown={""}
+						statement={"Hey Everyone! I'm an applied physics major at Brigham Young University with minors in computer science and Spanish. I love to play sports and go skiing."}
+						hometown={"Draper, UT"}
 					/>
 					<AboutMe
 						picture={"/img/isaac.jpg"}
