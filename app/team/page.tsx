@@ -31,7 +31,9 @@ const TeamPage = () => {
           <AboutMe
             picture={"/img/max.jpg"}
             name={"Max Pothier (CMO)"}
-            statement={""}
+            statement={
+              "I am a Computer Science major at Brigham Young University with a passion for music, sports, and building things!"
+            }
             hometown={"Gilbert, AZ"}
           />
         </div>
