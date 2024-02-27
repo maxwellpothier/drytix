@@ -55,6 +55,9 @@ export default function Home() {
 				<a className="mb-10 text-blue-600 underline" href="/team">
 					Meet the team!
 				</a>
+				<a className="mb-10 text-blue-600 underline" href="/demo">
+					MVP Demo
+				</a>
 				<ContactForm />
 				{/* <div className="flex mt-10">
 					<Image
