@@ -49,7 +49,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
 		const response = await client.messages.create({
 			body: "Testing again",
 			from: "+18336587945",
-			to: "+14807085773",
+			to: "+13855289781",
 		});
 
 		return new Response(response.sid, {status: 200});
