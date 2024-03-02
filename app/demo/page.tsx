@@ -5,6 +5,7 @@ import Head from "next/head";
 import {BaseSyntheticEvent, useEffect, useState} from "react";
 import twilio from "twilio";
 import {profileEnd} from "console";
+import SignOutForm from "@/components/SignOutForm";
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -78,6 +79,7 @@ const DemoPage = () => {
 				<a className="mb-10 text-blue-600 underline" href="/">
 					Back Home
 				</a>
+        <SignOutForm />
 				<div className="grid grid-cols-3 gap-20 ml-0">
 					<button
 						className="button"

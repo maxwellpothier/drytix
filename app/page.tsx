@@ -6,6 +6,9 @@ import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import logo from "../public/img/Dry.png";
+import RegisterForm from "@/components/RegisterForm";
+import LoginForm from "@/components/LoginForm";
+import SignOutForm from "@/components/SignOutForm";
 // import clothes from "../public/img/dry-clean.jpeg";
 
 type FormValues = {
@@ -55,7 +58,7 @@ export default function Home() {
 				<a className="mb-10 text-blue-600 underline" href="/team">
 					Meet the team!
 				</a>
-				<a className="mb-10 text-blue-600 underline" href="/demo">
+				<a className="mb-10 text-blue-600 underline" href="/login">
 					MVP Demo
 				</a>
 				<ContactForm />
