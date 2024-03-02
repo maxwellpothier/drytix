@@ -55,8 +55,8 @@ const LoginForm = () => {
 			hookForm.reset();
 			toast.success("Thanks! Directing you to the dashboard...");
 			// Save username and password in local storage
-			localStorage.setItem('username', username);
-			localStorage.setItem('password', pass);
+			sessionStorage.setItem('username', username);
+			sessionStorage.setItem('password', pass);
 			// Redirect to dashboard
 			window.location.href = '/demo';
 		}

@@ -76,9 +76,6 @@ const DemoPage = () => {
 			<div className="flex flex-col items-center mt-16 w-10/12 max-w-3xl">
 				<Image className="w-20 h-20 z-20" src={logo} alt="" />
 				<h1 className="text-4xl mb-8">Dry Cleaner&apos;s Interface</h1>
-				<a className="mb-10 text-blue-600 underline" href="/">
-					Back Home
-				</a>
         <SignOutForm />
 				<div className="grid grid-cols-3 gap-20 ml-0">
 					<button
