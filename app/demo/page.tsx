@@ -1,13 +1,21 @@
 "use client";
+import {useState} from "react";
 import Image from "next/image";
 import logo from "../../public/img/Dry.png";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {messages} from "@/data/messages";
+import {ChangeEvent} from "react";
 
-const PHONE_NUMBER_TO_SEND_TO = "+14807085773";
+const dummyCustomers: {[key: string]: string} = {
+	Max: "+14807085773",
+	Tanner: "+13855289781",
+	Isaac: "+18586884626",
+};
 
 const DemoPage = () => {
+	const [selectedPhone, setSelectedPhone] = useState("14807085773");
+
 	const sendMessage = async (messageType: string) => {
 		const predefinedMessage: string =
 			messages[messageType as keyof typeof messages];
@@ -20,13 +28,19 @@ const DemoPage = () => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					phone: PHONE_NUMBER_TO_SEND_TO,
+					phone: selectedPhone,
 					message: predefinedMessage,
 				}),
 			});
 		} catch (error) {
 			console.error("Error:", error);
 		}
+	};
+
+	const changeCustomer = (e: ChangeEvent<HTMLSelectElement>) => {
+		e.preventDefault();
+		const customer = e.target.value;
+		setSelectedPhone(dummyCustomers[customer]);
 	};
 
 	return (
@@ -37,6 +51,18 @@ const DemoPage = () => {
 				<a className="mb-10 text-blue-600 underline" href="/">
 					Back Home
 				</a>
+				<span className="mb-2">Customer to text:</span>
+				<select
+					className="mb-10 border"
+					onChange={e => changeCustomer(e)}>
+					{Object.keys(dummyCustomers).map((customer, index) => {
+						return (
+							<option key={index} value={customer}>
+								{customer}
+							</option>
+						);
+					})}
+				</select>
 				<div className="grid grid-cols-3 gap-20 ml-0">
 					<button
 						className="button"
