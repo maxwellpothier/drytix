@@ -2,8 +2,6 @@
 import ContactForm from "@/components/ContactForm";
 import {useForm} from "react-hook-form";
 // import Image from "next/image";
-import {ToastContainer} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import logo from "../public/img/Dry.png";
 // import clothes from "../public/img/dry-clean.jpeg";
@@ -15,12 +13,6 @@ type FormValues = {
 };
 
 export default function Home() {
-	const {handleSubmit, register} = useForm<FormValues>();
-
-	const onSubmit = (data: object) => {
-		console.log(data);
-	};
-
 	return (
 		<div className="w-full flex justify-center">
 			<div className="flex flex-col items-center mt-16 w-10/12 max-w-3xl">
@@ -55,6 +47,9 @@ export default function Home() {
 				<a className="mb-10 text-blue-600 underline" href="/team">
 					Meet the team!
 				</a>
+				<a className="mb-10 text-blue-600 underline" href="/demo">
+					MVP Demo
+				</a>
 				<ContactForm />
 				{/* <div className="flex mt-10">
 					<Image
@@ -65,7 +60,6 @@ export default function Home() {
 					/>
 				</div> */}
 			</div>
-			<ToastContainer />
 		</div>
 	);
 }
