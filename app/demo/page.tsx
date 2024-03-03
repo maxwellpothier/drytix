@@ -1,73 +1,32 @@
 "use client";
 import Image from "next/image";
 import logo from "../../public/img/Dry.png";
-import Head from "next/head";
-import {BaseSyntheticEvent, useEffect, useState} from "react";
-import twilio from "twilio";
-import {profileEnd} from "console";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {messages} from "@/data/messages";
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const PHONE_NUMBER_TO_SEND_TO = "+14807085773";
 
 const DemoPage = () => {
-	const [phone, setPhone] = useState("+13855289781");
-	const [loading, setLoading] = useState(false);
-	const [success, setSuccess] = useState(false);
-	const [error, setError] = useState(false);
-
 	const sendMessage = async (messageType: string) => {
-		// const res = await fetch("/api", {
-		// 	method: "POST",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify({
-		// 		phone: "+14807085773",
-		// 		message: "predefinedMessage",
-		// 	}),
-		// });
+		const predefinedMessage: string =
+			messages[messageType as keyof typeof messages];
 
-		console.log(messageType);
-		setLoading(true);
-		setError(false);
-		setSuccess(false);
-		let predefinedMessage = "";
-		// Set predefined messages based on button clicked
-		switch (messageType) {
-			case "ReadyForPickup":
-				predefinedMessage = "Your clothes are ready for pickup!";
-				break;
-			case "Reminder":
-				predefinedMessage =
-					"Friendly reminder about your dry cleaning ready for pickup.";
-				break;
-			case "DiscountOffer":
-				predefinedMessage =
-					"Special discount offer just for you! 10% off for your next visit.";
-				break;
-			default:
-				break;
+		console.log(predefinedMessage);
+		try {
+			const res = await fetch("/api", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					phone: PHONE_NUMBER_TO_SEND_TO,
+					message: predefinedMessage,
+				}),
+			});
+		} catch (error) {
+			console.error("Error:", error);
 		}
-		const res = await fetch("/api", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				phone: "+14807085773",
-				message: "predefinedMessage",
-			}),
-		});
-		console.log("api response", res);
-
-		const apiResponse = await res.json();
-		console.log(phone, predefinedMessage);
-		if (apiResponse.success) {
-			setSuccess(true);
-		} else {
-			setError(true);
-		}
-		setLoading(false);
 	};
 
 	return (
@@ -81,35 +40,43 @@ const DemoPage = () => {
 				<div className="grid grid-cols-3 gap-20 ml-0">
 					<button
 						className="button"
-						disabled={loading}
 						onClick={e => {
 							e.preventDefault();
-							sendMessage("ReadyForPickup");
+							toast.promise(sendMessage("ReadyForPickup"), {
+								pending: "Sending pickup status...",
+								success: "Pickup status sent!",
+								error: "Error sending pickup",
+							});
 						}}>
 						Ready for Pickup
 					</button>
 					<button
 						className="button"
-						disabled={loading}
 						onClick={e => {
 							e.preventDefault();
-							sendMessage("Reminder");
+							toast.promise(sendMessage("Reminder"), {
+								pending: "Sending reminder...",
+								success: "Reminder sent!",
+								error: "Error sending reminder",
+							});
 						}}>
 						Reminder
 					</button>
 					<button
 						className="button"
-						disabled={loading}
 						onClick={e => {
 							e.preventDefault();
-							sendMessage("DiscountOffer");
+							toast.promise(sendMessage("DiscountOffer"), {
+								pending: "Sending offer...",
+								success: "Offer sent!",
+								error: "Error sending offer",
+							});
 						}}>
 						Discount Offer
 					</button>
-					{success && <p>Message sent successfully.</p>}
-					{error && <p>Something went wrong.</p>}
 				</div>
 			</div>
+			<ToastContainer />
 			<style jsx>{`
 				.button {
 					display: flex;
