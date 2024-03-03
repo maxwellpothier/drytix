@@ -2,6 +2,7 @@ import twilio from "twilio";
 
 export async function POST(req: Request) {
 	const reqBody = await req.json();
+
 	const accountSid = <string>process.env.TWILIO_ACCOUNT_SID;
 	const token = <string>process.env.TWILIO_AUTH_TOKEN;
 	const client = twilio(accountSid, token);
