@@ -1,4 +1,7 @@
-const Banner = () => {
+import { useRouter } from "next/router";
+
+const Banner = (props: { dashboard: boolean }) => {
+  const dashboard = !props.dashboard;
   const dashboardContainerStyle: React.CSSProperties = {
     display: "flex",
     width: "100%",
@@ -23,12 +26,25 @@ const Banner = () => {
       <h1 style={bannerH1Style}>
         <a href="/">Home</a>
       </h1>
-      <h1 style={bannerH1Style}>
-        <a href="/dashboard">Dashboard</a>
-      </h1>
-      <h1 style={bannerH1Style}>
-        <a href="/login">Login</a>
-      </h1>
+      {dashboard ? (
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <h1 style={bannerH1Style}>
+            <a href="/register">Register</a>
+          </h1>
+          <h1 style={bannerH1Style}>
+            <a href="/login">Login</a>
+          </h1>
+          <h1 style={bannerH1Style}>
+            <a href="/team">Meet the Team</a>
+          </h1>
+        </div>
+      ) : (
+        <div>
+          <h1 style={bannerH1Style}>
+            <a href="/login">Logout</a>
+          </h1>
+        </div>
+      )}
     </div>
   );
 };

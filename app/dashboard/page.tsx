@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard-container">
-      <Banner />
+      <Banner dashboard={true} />
 
       <div className="main-sections">
         <div className="section users">
