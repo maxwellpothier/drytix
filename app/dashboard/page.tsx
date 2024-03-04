@@ -8,6 +8,7 @@ import {createClient} from "@supabase/supabase-js";
 import TaskForm from "../../components/TaskForm";
 import {sendMessage} from "../../utils/sendMessage";
 import {toast, ToastContainer} from "react-toastify";
+import Banner from "../../components/Banner";
 
 interface User {
 	id: number;
@@ -110,12 +111,7 @@ const Dashboard: React.FC = () => {
 
 	return (
 		<div className="dashboard-container">
-			<div className="banner">
-				<h1>
-					<a href="/">Home</a>
-				</h1>
-				<h1>Dashboard</h1>
-			</div>
+			<Banner />
 
 			<div className="main-sections">
 				<div className="section users">
