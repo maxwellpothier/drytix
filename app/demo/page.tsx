@@ -1,17 +1,13 @@
 "use client";
-import {useState} from "react";
 import Image from "next/image";
 import logo from "../../public/img/Dry.png";
-import Head from "next/head";
-import {BaseSyntheticEvent, useEffect, useState} from "react";
-import twilio from "twilio";
-import {profileEnd} from "console";
-import SignOutForm from "@/components/SignOutForm";
-import NumberForm from "@/components/NumberForm";
+import {useState} from "react";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {ChangeEvent} from "react";
 import {sendMessage} from "../../utils/sendMessage";
+import NumberForm from "../../components/NumberForm";
+import SignOutForm from "../../components/SignOutForm";
 
 const dummyCustomers: {[key: string]: string} = {
 	Max: "+14807085773",
@@ -33,7 +29,7 @@ const DemoPage = () => {
 			<div className="flex flex-col items-center mt-16 w-10/12 max-w-3xl">
 				<Image className="w-20 h-20 z-20" src={logo} alt="" />
 				<h1 className="text-4xl mb-8">Dry Cleaner&apos;s Interface</h1>
-        <SignOutForm />
+				<SignOutForm />
 				<a className="mb-10 text-blue-600 underline" href="/">
 					Back Home
 				</a>
@@ -96,8 +92,8 @@ const DemoPage = () => {
 						Discount Offer
 					</button>
 				</div>
-        <div style={{ height: '50px' }} />
-        <NumberForm />
+				<div style={{height: "50px"}} />
+				<NumberForm />
 			</div>
 			<ToastContainer />
 			<style jsx>{`
