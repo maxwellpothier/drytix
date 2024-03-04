@@ -1,0 +1,127 @@
+/* Dashboard.css */
+
+.dashboard-container {
+  display:flex;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  flex-direction: column;
+  flex: auto;
+
+}
+.banner {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  height: auto; /* Set height to auto to adjust based on content */
+  background-color: lightgray;
+  text-align: center; /* Center the content horizontally */
+}
+
+
+
+.heading-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+.banner h1 {
+  margin: 0; /* Remove default margin for h1 to avoid extra spacing */
+  color: blue; /* Set text color to contrast with the background */
+  padding: 10px
+}
+.main-sections {
+  display: flex;
+  flex-direction: row;
+  width: 100%; /* or a specific value if needed */
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  margin:10px;
+  background-color: lightgray;
+  border-radius:10px;
+  padding:20px;
+  width:auto
+}
+.task-pop-up{
+  display: flex;
+  background-color: lightblue;
+  border-radius: 10px;
+  padding:20px;
+}
+
+.delete {
+  background-color: #ff5555;
+  justify-content: center;
+  align-items: center;
+  text-wrap: nowrap;
+  margin: 5px;
+}
+.users {
+  justify-content: left;
+  width:20%;
+  height:auto
+}
+
+.progress {
+  width:80%;
+  align-items: left;  
+  height:auto;
+}
+
+.toggle {
+  justify-content: center;
+  align-items: center;
+  text-wrap: nowrap;
+  margin: 5px;
+}
+
+ul {
+  list-style-type: none;
+  padding:0
+
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+input {
+  border-radius: 10px;
+  margin-right: 8px;
+  padding: 8px;
+}
+
+h1 {
+  text-wrap: nowrap;
+}
+
+select {
+  border-radius: 10px;
+  height:50px;
+  margin:5px;
+}
+
+input {
+  border-radius: 10px;
+}
+
+button {
+  text-wrap: nowrap;
+  width:auto;
+  height:50px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: slategray;
+  margin:5px;
+}
