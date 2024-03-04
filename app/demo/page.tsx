@@ -5,7 +5,7 @@ import logo from "../../public/img/Dry.png";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {ChangeEvent} from "react";
-import {sendMessage} from "@/utils/sendMessage";
+import {sendMessage} from "../../utils/sendMessage";
 
 const dummyCustomers: {[key: string]: string} = {
 	Max: "+14807085773",
