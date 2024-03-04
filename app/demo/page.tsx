@@ -1,13 +1,15 @@
 "use client";
 import Image from "next/image";
 import logo from "../../public/img/Dry.png";
-import {useState} from "react";
-import {ToastContainer, toast} from "react-toastify";
-import {ChangeEvent} from "react";
-import {sendMessage} from "../../utils/sendMessage";
-import NumberForm from "../../components/NumberForm";
+import Head from "next/head";
+import {BaseSyntheticEvent, useEffect, useState} from "react";
+import {profileEnd} from "console";
 import SignOutForm from "../../components/SignOutForm";
+import NumberForm from "../../components/NumberForm";
+import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {messages} from "../../data/messages";
+import {ChangeEvent} from "react";
 
 const dummyCustomers: {[key: string]: string} = {
 	Max: "+14807085773",
