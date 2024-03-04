@@ -243,12 +243,6 @@ const ClothingItem = (props: {task: Task; triggerUpdate}) => {
 								.select("customer_id")
 								.eq("id", task.id);
 
-							const {data: customer, error: customerError} =
-								await supabase
-									.from("customer")
-									.select("phone_number")
-									.eq("id", data[0].customer_id);
-
 							const {data: jobData, error: jobError} =
 								await supabase
 									.from("job")
@@ -257,6 +251,12 @@ const ClothingItem = (props: {task: Task; triggerUpdate}) => {
 									.select();
 
 							setIsComplete(true);
+
+							const {data: customer, error: customerError} =
+								await supabase
+									.from("customer")
+									.select("phone_number")
+									.eq("id", data[0].customer_id);
 
 							toast.promise(
 								sendMessage(
@@ -298,6 +298,24 @@ const ClothingItem = (props: {task: Task; triggerUpdate}) => {
 									.update({sent_reminder: Date.now()})
 									.eq("id", task.id)
 									.select();
+
+								const {data: customer, error: customerError} =
+									await supabase
+										.from("customer")
+										.select("phone_number")
+										.eq("id", data[0].customer_id);
+
+								toast.promise(
+									sendMessage(
+										customer[0].phone_number,
+										"Reminder - Your dry cleaning is complete!"
+									),
+									{
+										pending: "Sending reminder...",
+										success: "Reminder sent!",
+										error: "Error sending reminder",
+									}
+								);
 							}}>
 							{task?.sentReminder ? (
 								<p>Reminder Sent: {lastReminder}</p>
