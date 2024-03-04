@@ -6,6 +6,7 @@ import {BaseSyntheticEvent, useEffect, useState} from "react";
 import twilio from "twilio";
 import {profileEnd} from "console";
 import SignOutForm from "@/components/SignOutForm";
+import NumberForm from "@/components/NumberForm";
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -108,6 +109,7 @@ const DemoPage = () => {
 					{success && <p>Message sent successfully.</p>}
 					{error && <p>Something went wrong.</p>}
 				</div>
+        <NumberForm />
 			</div>
 			<style jsx>{`
 				.button {
