@@ -237,7 +237,7 @@ const ClothingItem = (props: {task: Task; triggerUpdate}) => {
 					<button
 						className="toggle"
 						onClick={async () => {
-							triggerUpdate(true);
+							
 							const {data, error} = await supabase
 								.from("job")
 								.select("customer_id")
@@ -269,6 +269,7 @@ const ClothingItem = (props: {task: Task; triggerUpdate}) => {
 									error: "Error sending message",
 								}
 							);
+              triggerUpdate(true);
 						}}>
 						Mark complete
 					</button>
