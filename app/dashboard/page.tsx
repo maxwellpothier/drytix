@@ -6,10 +6,13 @@ import "./page.css";
 import { createClient } from "@supabase/supabase-js";
 import TaskForm from "../../components/TaskForm";
 import Banner from "../../components/Banner";
+import UserEditForm from "../../components/UserEditForm";
 
 interface User {
   id: number;
   name: string;
+  email: string;
+  phone_number: string;
 }
 
 interface Task {
@@ -31,14 +34,28 @@ const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newUserName, setNewUserName] = useState<string>("");
+  const [newEmail, setNewEmail] = useState<string>("");
+  const [newPhone, setNewPhone] = useState<string>("");
   const [newTaskDescription, setNewTaskDescription] = useState<string>("");
   const [update, setUpdate] = useState(false);
   const [newTaskToggle, setNewTaskToggle] = useState(false);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [showEditForm, setShowEditForm] = useState(false);
+
+  const openEditForm = (user: User) => {
+    setEditingUser(user);
+    setShowEditForm(true);
+  };
+
+  const closeEditForm = () => {
+    setEditingUser(null);
+    setShowEditForm(false);
+  };
 
   const getCustomers = async () => {
     let { data: customers, error } = await supabase
       .from("customer")
-      .select("id, name");
+      .select("id, name, email, phone_number");
 
     setUsers(customers);
   };
@@ -79,10 +96,12 @@ const Dashboard: React.FC = () => {
   }, [update]);
 
   const addUser = () => {
-    if (newUserName.trim() !== "") {
+    if (newUserName.trim() !== "" && newEmail.trim() !== "" && newPhone.trim() !== "") {
       const newUser: User = {
         id: users.length + 1,
         name: newUserName,
+        email: newEmail,
+        phone_number: newPhone,
       };
       setUsers([...users, newUser]);
       setNewUserName("");
@@ -115,10 +134,19 @@ const Dashboard: React.FC = () => {
           <h1>Users</h1>
           <ul>
             {users.map((user) => (
-              <li key={user.id}>{user.name}</li>
+              <li key={user.id} onClick={() => openEditForm(user)}>
+                {user.name}
+              </li>
             ))}
           </ul>
         </div>
+        {editingUser && showEditForm && (
+          <UserEditForm
+            user={editingUser}
+            onClose={closeEditForm}
+            onUpdate={getCustomers}
+          />
+        )}
 
         <div className="section progress">
           <div className="heading-container">
