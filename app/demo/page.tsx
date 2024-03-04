@@ -4,8 +4,8 @@ import Image from "next/image";
 import logo from "../../public/img/Dry.png";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {messages} from "@/data/messages";
 import {ChangeEvent} from "react";
+import {sendMessage} from "@/utils/sendMessage";
 
 const dummyCustomers: {[key: string]: string} = {
 	Max: "+14807085773",
@@ -15,27 +15,6 @@ const dummyCustomers: {[key: string]: string} = {
 
 const DemoPage = () => {
 	const [selectedPhone, setSelectedPhone] = useState("14807085773");
-
-	const sendMessage = async (messageType: string) => {
-		const predefinedMessage: string =
-			messages[messageType as keyof typeof messages];
-
-		console.log(predefinedMessage);
-		try {
-			const res = await fetch("/api", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					phone: selectedPhone,
-					message: predefinedMessage,
-				}),
-			});
-		} catch (error) {
-			console.error("Error:", error);
-		}
-	};
 
 	const changeCustomer = (e: ChangeEvent<HTMLSelectElement>) => {
 		e.preventDefault();
@@ -68,11 +47,14 @@ const DemoPage = () => {
 						className="button"
 						onClick={e => {
 							e.preventDefault();
-							toast.promise(sendMessage("ReadyForPickup"), {
-								pending: "Sending pickup status...",
-								success: "Pickup status sent!",
-								error: "Error sending pickup",
-							});
+							toast.promise(
+								sendMessage(selectedPhone, "ReadyForPickup"),
+								{
+									pending: "Sending pickup status...",
+									success: "Pickup status sent!",
+									error: "Error sending pickup",
+								}
+							);
 						}}>
 						Ready for Pickup
 					</button>
@@ -80,11 +62,14 @@ const DemoPage = () => {
 						className="button"
 						onClick={e => {
 							e.preventDefault();
-							toast.promise(sendMessage("Reminder"), {
-								pending: "Sending reminder...",
-								success: "Reminder sent!",
-								error: "Error sending reminder",
-							});
+							toast.promise(
+								sendMessage(selectedPhone, "Reminder"),
+								{
+									pending: "Sending reminder...",
+									success: "Reminder sent!",
+									error: "Error sending reminder",
+								}
+							);
 						}}>
 						Reminder
 					</button>
@@ -92,11 +77,14 @@ const DemoPage = () => {
 						className="button"
 						onClick={e => {
 							e.preventDefault();
-							toast.promise(sendMessage("DiscountOffer"), {
-								pending: "Sending offer...",
-								success: "Offer sent!",
-								error: "Error sending offer",
-							});
+							toast.promise(
+								sendMessage(selectedPhone, "DiscountOffer"),
+								{
+									pending: "Sending offer...",
+									success: "Offer sent!",
+									error: "Error sending offer",
+								}
+							);
 						}}>
 						Discount Offer
 					</button>
