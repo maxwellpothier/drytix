@@ -189,7 +189,10 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
   const supabase = createClient(supabaseUrl, supabaseKey);
   const [isComplete, setIsComplete] = useState(task.isFinished);
   const [sendReminder, setSendReminder] = useState(1);
-  const lastReminder = new Date(task.sentReminder).toDateString();
+  const lastReminder =
+    new Date(task.sentReminder).toLocaleDateString() +
+    " " +
+    new Date(task.sentReminder).toLocaleTimeString();
 
   const handleDelete = async () => {
     const { data, error } = await supabase
@@ -280,7 +283,10 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
 const CompletedClothingItem = (props: { task: Task; triggerUpdate }) => {
   const { task, triggerUpdate } = props;
   const [sendReminder, setSendReminder] = useState(1);
-  const datePickedUp = new Date(task.datePickedUp).toDateString();
+  const datePickedUp =
+    new Date(task.datePickedUp).toLocaleDateString() +
+    " " +
+    new Date(task.datePickedUp).toLocaleTimeString();
 
   return (
     <div
