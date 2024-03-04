@@ -109,6 +109,7 @@ const DemoPage = () => {
 					{success && <p>Message sent successfully.</p>}
 					{error && <p>Something went wrong.</p>}
 				</div>
+        <div style={{ height: '50px' }} />
         <NumberForm />
 			</div>
 			<style jsx>{`
