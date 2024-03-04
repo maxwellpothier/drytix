@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import "./page.css";
 import { createClient } from "@supabase/supabase-js";
+import TaskForm from "../../components/TaskForm";
 
 interface User {
   id: number;
@@ -31,6 +32,7 @@ const Dashboard: React.FC = () => {
   const [newUserName, setNewUserName] = useState<string>("");
   const [newTaskDescription, setNewTaskDescription] = useState<string>("");
   const [update, setUpdate] = useState(false);
+  const [newTaskToggle, setNewTaskToggle] = useState(false);
 
   const getCustomers = async () => {
     let { data: customers, error } = await supabase
@@ -44,17 +46,16 @@ const Dashboard: React.FC = () => {
     let { data: jobDetails, error } = await supabase
       .from("job")
       .select(
-        "id, is_finished, item_id, customer_id, picked_up_timestamp, items_ids, picked_up, sent_reminder, item(id, name), customer(id, name)"
+        "id, is_finished, item_id, customer_id, picked_up_timestamp, items, picked_up, sent_reminder, item(id, name), customer(id, name)"
       );
     const inProg: Task[] = jobDetails.map((item: any) => {
-      item.id == 1 && console.log(item);
       const taskItem: Task = {
         id: item.id,
         customerName: item.customer.name,
         itemName: item.item.name,
         isFinished: item.is_finished,
         isPickedUp: item.picked_up,
-        items: item.items_ids,
+        items: item.items,
         sentReminder: item.sent_reminder,
         datePickedUp: item.picked_up_timestamp,
       };
@@ -124,17 +125,11 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="section progress">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              margin: 10,
-            }}
-          >
+          <div className="heading-container">
             <h1>In Progress</h1>
-            <button>add new</button>
+            <button onClick={() => setNewTaskToggle(!newTaskToggle)}>
+              add new
+            </button>
           </div>
 
           <ul>
@@ -146,15 +141,7 @@ const Dashboard: React.FC = () => {
                 </li>
               ))}
           </ul>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              margin: 10,
-            }}
-          >
+          <div className="heading-container">
             <h1>Completed</h1>
           </div>
           <ul>
@@ -166,15 +153,7 @@ const Dashboard: React.FC = () => {
                 </li>
               ))}
           </ul>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              margin: 10,
-            }}
-          >
+          <div className="heading-container">
             <h1>Picked Up</h1>
           </div>
           <ul>
@@ -190,6 +169,14 @@ const Dashboard: React.FC = () => {
               ))}
           </ul>
         </div>
+        {newTaskToggle && (
+          <div className="section task-pop-up ">
+            <TaskForm
+              setToggle={setNewTaskToggle}
+              triggerUpdate={setUpdate}
+            ></TaskForm>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -201,13 +188,20 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
   const supabaseKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
   const supabase = createClient(supabaseUrl, supabaseKey);
   const [isComplete, setIsComplete] = useState(task.isFinished);
-  const [isPickedUp, setIsPickedUp] = useState(task.isPickedUp);
   const [sendReminder, setSendReminder] = useState(1);
   const lastReminder = new Date(task.sentReminder).toDateString();
 
-  useEffect(() => {
-    console.log(new Date(task.sentReminder).toDateString());
-  }, [sendReminder]);
+  const handleDelete = async () => {
+    const { data, error } = await supabase
+      .from("job")
+      .delete()
+      .eq("id", task.id)
+      .select();
+
+    if (!error) {
+      triggerUpdate(true);
+    }
+  };
 
   return (
     <div
@@ -219,75 +213,74 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
     >
       <div>
         <h1>{task.customerName}: </h1>
-        <h1>{task.itemName}</h1>
+        {task.items.map((item: any, index) => (
+          <h1 key={index + item}>{item}</h1>
+        ))}
       </div>
 
-      {!isComplete ? (
-        <button
-          className="toggle"
-          onClick={async () => {
-            triggerUpdate(true);
-            const { data, error } = await supabase
-              .from("job")
-              .update({ is_finished: true })
-              .eq("id", task.id)
-              .select();
-            setIsComplete(true);
-          }}
-        >
-          Mark complete
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        {!isComplete ? (
+          <button
+            className="toggle"
+            onClick={async () => {
+              triggerUpdate(true);
+              const { data, error } = await supabase
+                .from("job")
+                .update({ is_finished: true })
+                .eq("id", task.id)
+                .select();
+              setIsComplete(true);
+            }}
+          >
+            Mark complete
+          </button>
+        ) : (
+          <div>
+            <button
+              className="toggle"
+              onClick={async () => {
+                triggerUpdate(true);
+                const { data, error } = await supabase
+                  .from("job")
+                  .update({ picked_up: true, picked_up_timestamp: Date.now() })
+                  .eq("id", task.id)
+                  .select();
+              }}
+            >
+              Picked Up
+            </button>
+            <button
+              className="toggle"
+              onClick={async () => {
+                triggerUpdate(true);
+                const { data, error } = await supabase
+                  .from("job")
+                  .update({ sent_reminder: Date.now() })
+                  .eq("id", task.id)
+                  .select();
+              }}
+            >
+              {task?.sentReminder ? (
+                <p>Reminder Sent: {lastReminder}</p>
+              ) : (
+                <p>Send Reminder</p>
+              )}
+            </button>
+          </div>
+        )}
+
+        <button className="delete" onClick={handleDelete}>
+          Delete
         </button>
-      ) : (
-        <div>
-          <button
-            className="toggle"
-            onClick={async () => {
-              triggerUpdate(true);
-              const { data, error } = await supabase
-                .from("job")
-                .update({ picked_up: true, picked_up_timestamp: Date.now() })
-                .eq("id", task.id)
-                .select();
-            }}
-          >
-            Picked Up
-          </button>
-          <button
-            className="toggle"
-            onClick={async () => {
-              triggerUpdate(true);
-              const { data, error } = await supabase
-                .from("job")
-                .update({ sent_reminder: Date.now() })
-                .eq("id", task.id)
-                .select();
-            }}
-          >
-            {task?.sentReminder ? (
-              <p>Reminder Sent: {lastReminder}</p>
-            ) : (
-              <p>Send Reminder</p>
-            )}
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
 
 const CompletedClothingItem = (props: { task: Task; triggerUpdate }) => {
   const { task, triggerUpdate } = props;
-  const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const supabaseKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-  const supabase = createClient(supabaseUrl, supabaseKey);
-  const [isComplete, setIsComplete] = useState(task.isFinished);
-  const [isPickedUp, setIsPickedUp] = useState(task.isPickedUp);
   const [sendReminder, setSendReminder] = useState(1);
   const datePickedUp = new Date(task.datePickedUp).toDateString();
-
-  useEffect(() => {
-    console.log(new Date(task.sentReminder).toDateString());
-  }, [sendReminder]);
 
   return (
     <div
@@ -299,7 +292,9 @@ const CompletedClothingItem = (props: { task: Task; triggerUpdate }) => {
     >
       <div>
         <h1>{task.customerName}: </h1>
-        <h1>{task.itemName}</h1>
+        {task.items.map((item: any, index) => (
+          <h1 key={index + item}>{item}</h1>
+        ))}
       </div>
 
       <button className="toggle">

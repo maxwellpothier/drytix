@@ -23,6 +23,15 @@
   text-align: center; /* Center the content horizontally */
 }
 
+
+
+.heading-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
 .banner h1 {
   margin: 0; /* Remove default margin for h1 to avoid extra spacing */
   color: blue; /* Set text color to contrast with the background */
@@ -43,7 +52,20 @@
   padding:20px;
   width:auto
 }
+.task-pop-up{
+  display: flex;
+  background-color: lightblue;
+  border-radius: 10px;
+  padding:20px;
+}
 
+.delete {
+  background-color: #ff5555;
+  justify-content: center;
+  align-items: center;
+  text-wrap: nowrap;
+  margin: 5px;
+}
 .users {
   justify-content: left;
   width:20%;
@@ -57,8 +79,6 @@
 }
 
 .toggle {
-  width:300px;
-  height:40px;
   justify-content: center;
   align-items: center;
   text-wrap: nowrap;
@@ -85,11 +105,22 @@ h1 {
   text-wrap: nowrap;
 }
 
+select {
+  border-radius: 10px;
+  height:50px;
+  margin:5px;
+}
 
+input {
+  border-radius: 10px;
+}
 
 button {
+  width:300px;
+  height:50px;
   padding: 8px;
   border-radius: 10px;
   cursor: pointer;
   background-color: slategray;
+  margin:5px;
 }
