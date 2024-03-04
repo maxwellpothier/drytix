@@ -1,28 +1,25 @@
 "use client";
 import ContactForm from "../components/ContactForm";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 // import Image from "next/image";
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import logo from "../public/img/Dry.png";
-import RegisterForm from "@/components/RegisterForm";
-import LoginForm from "@/components/LoginForm";
-import SignOutForm from "@/components/SignOutForm";
 // import clothes from "../public/img/dry-clean.jpeg";
 
 type FormValues = {
-  name: string;
-  email: string;
-  phone: string;
+	name: string;
+	email: string;
+	phone: string;
 };
 
 export default function Home() {
-  const { handleSubmit, register } = useForm<FormValues>();
+	const {handleSubmit, register} = useForm<FormValues>();
 
-  const onSubmit = (data: object) => {
-    console.log(data);
-  };
+	const onSubmit = (data: object) => {
+		console.log(data);
+	};
 
 	return (
 		<div className="w-full flex justify-center">
@@ -70,8 +67,8 @@ export default function Home() {
 						alt="hero"
 					/>
 				</div> */}
-      </div>
-      <ToastContainer />
-    </div>
-  );
+			</div>
+			<ToastContainer />
+		</div>
+	);
 }
