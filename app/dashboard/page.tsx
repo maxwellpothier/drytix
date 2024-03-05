@@ -3,8 +3,11 @@
 
 import React, { useEffect, useState } from "react";
 import "./page.css";
+import "react-toastify/dist/ReactToastify.css";
 import { createClient } from "@supabase/supabase-js";
 import TaskForm from "../../components/TaskForm";
+import { sendMessage } from "../../utils/sendMessage";
+import { toast, ToastContainer } from "react-toastify";
 import Banner from "../../components/Banner";
 
 interface User {
@@ -174,6 +177,7 @@ const Dashboard: React.FC = () => {
           </div>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };
@@ -222,13 +226,36 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
           <button
             className="toggle"
             onClick={async () => {
-              triggerUpdate(true);
               const { data, error } = await supabase
+                .from("job")
+                .select("customer_id")
+                .eq("id", task.id);
+
+              const { data: jobData, error: jobError } = await supabase
                 .from("job")
                 .update({ is_finished: true })
                 .eq("id", task.id)
                 .select();
+
               setIsComplete(true);
+
+              const { data: customer, error: customerError } = await supabase
+                .from("customer")
+                .select("phone_number")
+                .eq("id", data[0].customer_id);
+
+              toast.promise(
+                sendMessage(
+                  customer[0].phone_number,
+                  "Your dry cleaning is complete!"
+                ),
+                {
+                  pending: "Sending message...",
+                  success: "Message sent!",
+                  error: "Error sending message",
+                }
+              );
+              triggerUpdate(true);
             }}
           >
             Mark complete
@@ -241,7 +268,10 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
                 triggerUpdate(true);
                 const { data, error } = await supabase
                   .from("job")
-                  .update({ picked_up: true, picked_up_timestamp: Date.now() })
+                  .update({
+                    picked_up: true,
+                    picked_up_timestamp: Date.now(),
+                  })
                   .eq("id", task.id)
                   .select();
               }}
@@ -257,6 +287,23 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
                   .update({ sent_reminder: Date.now() })
                   .eq("id", task.id)
                   .select();
+
+                const { data: customer, error: customerError } = await supabase
+                  .from("customer")
+                  .select("phone_number")
+                  .eq("id", data[0].customer_id);
+
+                toast.promise(
+                  sendMessage(
+                    customer[0].phone_number,
+                    "Reminder - Your dry cleaning is complete!"
+                  ),
+                  {
+                    pending: "Sending reminder...",
+                    success: "Reminder sent!",
+                    error: "Error sending reminder",
+                  }
+                );
               }}
             >
               {task?.sentReminder ? (
