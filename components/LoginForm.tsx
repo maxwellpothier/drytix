@@ -79,7 +79,7 @@ const LoginForm = () => {
       <FormInput
         label={"Password"}
         name={"pass"}
-        type={"text"}
+        type={"password"}
         hookForm={hookForm}
       />
       <button

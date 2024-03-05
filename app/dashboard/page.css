@@ -8,12 +8,14 @@
   font-family: 'Arial', sans-serif;
   flex-direction: column;
   flex: auto;
+  color:white;
 
 }
 .banner h1 {
   margin: 0; /* Remove default margin for h1 to avoid extra spacing */
   color: blue; /* Set text color to contrast with the background */
-  padding: 10px
+  padding: 10px;
+  font-weight: bolder;
 }
 
 
@@ -35,14 +37,14 @@
   display: flex;
   flex-direction: column;
   margin:10px;
-  background-color: lightgray;
+  background-color: #1f2937;
   border-radius:10px;
   padding:20px;
   width:auto
 }
 .task-pop-up{
   display: flex;
-  background-color: lightblue;
+  background-color: #1f2937;
   border-radius: 10px;
   padding:20px;
 }
@@ -73,6 +75,10 @@
   margin: 5px;
 }
 
+.clothing-text {
+  color: #1f2937;
+}
+
 ul {
   list-style-type: none;
   padding:0
@@ -87,16 +93,20 @@ input {
   border-radius: 10px;
   margin-right: 8px;
   padding: 8px;
+  background-color: gray;
 }
 
 h1 {
   text-wrap: nowrap;
+  font-weight: bold;
+  color:slategray;
 }
 
 select {
   border-radius: 10px;
   height:50px;
   margin:5px;
+  background-color: gray;
 }
 
 input {
@@ -110,6 +120,13 @@ button {
   padding: 8px;
   border-radius: 10px;
   cursor: pointer;
-  background-color: slategray;
   margin:5px;
+  background-color: #fde047; /* bg-yellow-300 */
+  padding-left: 2rem; /* px-8 */
+  padding-right: 2rem; /* px-8 */
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem; /* py-2 */
+  border-radius: 9999px; /* rounded-full (use a high value for a circular shape) */
+  color:black;
+
 }

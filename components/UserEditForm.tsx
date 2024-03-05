@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {createClient} from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
 
 interface User {
   id: number;
@@ -12,17 +12,46 @@ interface UserEditFormProps {
   user: User;
   onClose: () => void;
   onUpdate: () => void;
+  triggerUpdate: (flag: boolean) => void;
 }
 
-const UserEditForm: React.FC<UserEditFormProps> = ({ user, onClose, onUpdate }) => {
+const UserEditForm: React.FC<UserEditFormProps> = ({
+  user,
+  onClose,
+  onUpdate,
+  triggerUpdate,
+}) => {
   const [editUserName, setEditUserName] = useState(user.name);
   const [editUserEmail, setEditUserEmail] = useState(user.email);
-  const [editUserPhoneNumber, setEditUserPhoneNumber] = useState(user.phone_number);
+  const [editUserPhoneNumber, setEditUserPhoneNumber] = useState(
+    user.phone_number
+  );
+
+  const deleteUser = async () => {
+    const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+    const supabaseKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    console.log(user.id);
+
+    const { error: itemDeletionError } = await supabase
+      .from("job")
+      .delete()
+      .eq("customer_id", user.id);
+
+    const { error: userDeletionError } = await supabase
+      .from("customer")
+      .delete()
+      .eq("id", user.id);
+    onUpdate();
+    triggerUpdate(true);
+  };
 
   const editUser = async () => {
     try {
       const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-      const supabaseKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+      const supabaseKey: string =
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
       const supabase = createClient(supabaseUrl, supabaseKey);
       // Update the user information in the database
       const { data, error } = await supabase
@@ -80,6 +109,9 @@ const UserEditForm: React.FC<UserEditFormProps> = ({ user, onClose, onUpdate }) 
       </label>
       <button onClick={editUser}>Save</button>
       <button onClick={onClose}>Cancel</button>
+      <button style={{ backgroundColor: "#ff5555" }} onClick={deleteUser}>
+        Delete
+      </button>
     </div>
   );
 };

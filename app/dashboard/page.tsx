@@ -151,6 +151,7 @@ const Dashboard: React.FC = () => {
                       user={editingUser}
                       onClose={closeEditForm}
                       onUpdate={getCustomers}
+                      triggerUpdate={setUpdate}
                     />
                   )}
                 </div>
@@ -163,7 +164,7 @@ const Dashboard: React.FC = () => {
           <div className="heading-container">
             <h1>In Progress</h1>
             <button onClick={() => setNewTaskToggle(!newTaskToggle)}>
-              add new
+              {!newTaskToggle ? "add new" : "cancel"}
             </button>
           </div>
 
@@ -224,7 +225,7 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
   const supabaseKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
   const supabase = createClient(supabaseUrl, supabaseKey);
   const [isComplete, setIsComplete] = useState(task.isFinished);
-  const [sendReminder, setSendReminder] = useState(1);
+  const [sendReminder, setSendReminder] = useState();
   const lastReminder =
     new Date(task.sentReminder).toLocaleDateString() +
     " " +
@@ -253,7 +254,9 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
       <div>
         <h1>{task.customerName}: </h1>
         {task.items.map((item: any, index) => (
-          <h1 key={index + item}>{item}</h1>
+          <h1 className="clothing-text" key={index + item}>
+            {item}
+          </h1>
         ))}
       </div>
 
@@ -340,6 +343,7 @@ const ClothingItem = (props: { task: Task; triggerUpdate }) => {
                     error: "Error sending reminder",
                   }
                 );
+                triggerUpdate(true);
               }}
             >
               {task?.sentReminder ? (
@@ -376,9 +380,11 @@ const CompletedClothingItem = (props: { task: Task; triggerUpdate }) => {
       }}
     >
       <div>
-        <h1>{task.customerName}: </h1>
+        <h1> {task.customerName}: </h1>
         {task.items.map((item: any, index) => (
-          <h1 key={index + item}>{item}</h1>
+          <h1 className="clothing-text" key={index + item}>
+            {item}
+          </h1>
         ))}
       </div>
 

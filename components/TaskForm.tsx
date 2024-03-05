@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import NumberForm from "./NumberForm";
 
 interface User {
   id: number;
@@ -18,6 +19,7 @@ const TaskForm = (props: { setToggle; triggerUpdate }) => {
   const [items, setItems] = useState([]);
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState();
+  const [showNumberForm, setShowNumberForm] = useState(false);
 
   const getCustomers = async () => {
     let { data: customers, error } = await supabase
@@ -90,6 +92,8 @@ const TaskForm = (props: { setToggle; triggerUpdate }) => {
         style={{
           display: "flex",
           flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <select value={selectedUser} onChange={handleUserIdChange}>
@@ -102,8 +106,20 @@ const TaskForm = (props: { setToggle; triggerUpdate }) => {
             );
           })}
         </select>
-        <button>Add User</button>
+        <button
+          onClick={() => {
+            setShowNumberForm(!showNumberForm);
+          }}
+        >
+          {!showNumberForm ? "Add User" : "Cancel"}
+        </button>
       </div>
+      {showNumberForm && (
+        <NumberForm
+          triggerUpdate={triggerUpdate}
+          setCurrentUser={setSelectedUser}
+        />
+      )}
 
       <br />
       <label>
@@ -164,7 +180,7 @@ const ListItem = ({ name, onRemove, setItems }) => {
         padding: "10px",
         border: "1px solid #ddd",
         marginBottom: "5px",
-        backgroundColor: "white",
+        backgroundColor: "gray",
         borderRadius: "10px",
       }}
     >
