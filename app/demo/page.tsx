@@ -92,7 +92,6 @@ const DemoPage = () => {
 					</button>
 				</div>
 				<div style={{height: "50px"}} />
-				<NumberForm />
 			</div>
 			<ToastContainer />
 			<style jsx>{`
