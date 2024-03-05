@@ -99,7 +99,11 @@ const Dashboard: React.FC = () => {
   }, [update]);
 
   const addUser = () => {
-    if (newUserName.trim() !== "" && newEmail.trim() !== "" && newPhone.trim() !== "") {
+    if (
+      newUserName.trim() !== "" &&
+      newEmail.trim() !== "" &&
+      newPhone.trim() !== ""
+    ) {
       const newUser: User = {
         id: users.length + 1,
         name: newUserName,
@@ -137,19 +141,23 @@ const Dashboard: React.FC = () => {
           <h1>Users</h1>
           <ul>
             {users.map((user) => (
-              <li key={user.id} onClick={() => openEditForm(user)}>
-                {user.name}
-              </li>
+              <div>
+                <li key={user.id} onClick={() => openEditForm(user)}>
+                  {editingUser?.id != user.id && user.name}
+                </li>
+                <div>
+                  {editingUser?.id == user.id && showEditForm && (
+                    <UserEditForm
+                      user={editingUser}
+                      onClose={closeEditForm}
+                      onUpdate={getCustomers}
+                    />
+                  )}
+                </div>
+              </div>
             ))}
           </ul>
         </div>
-        {editingUser && showEditForm && (
-          <UserEditForm
-            user={editingUser}
-            onClose={closeEditForm}
-            onUpdate={getCustomers}
-          />
-        )}
 
         <div className="section progress">
           <div className="heading-container">
