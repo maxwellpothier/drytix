@@ -10,19 +10,11 @@
   flex: auto;
 
 }
-.banner {
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  width: 100%;
-  height: auto; /* Set height to auto to adjust based on content */
-  background-color: lightgray;
-  text-align: center; /* Center the content horizontally */
+.banner h1 {
+  margin: 0; /* Remove default margin for h1 to avoid extra spacing */
+  color: blue; /* Set text color to contrast with the background */
+  padding: 10px
 }
-
 
 
 .heading-container {
@@ -32,11 +24,7 @@
   align-items: center;
   margin: 10px;
 }
-.banner h1 {
-  margin: 0; /* Remove default margin for h1 to avoid extra spacing */
-  color: blue; /* Set text color to contrast with the background */
-  padding: 10px
-}
+
 .main-sections {
   display: flex;
   flex-direction: row;
