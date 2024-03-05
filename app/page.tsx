@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="w-full flex justify-center">
       <div className="flex flex-col items-center mt-16 w-10/12 max-w-3xl">
-        <Banner />
+        <Banner dashboard={false} />
         <Image className="w-20 h-20 z-20" src={logo} alt="" />
         <h1 className="text-4xl mb-8">DryTix</h1>
         <p className="text-l mb-4">
@@ -55,12 +55,6 @@ export default function Home() {
           </a>{" "}
           to help us understand how to create the most useful product!
         </p>
-        <a className="mb-10 text-blue-600 underline" href="/team">
-          Meet the team!
-        </a>
-        <a className="mb-10 text-blue-600 underline" href="/login">
-          MVP Demo
-        </a>
         <ContactForm />
         {/* <div className="flex mt-10">
 					<Image

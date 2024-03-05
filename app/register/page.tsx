@@ -7,7 +7,7 @@ import RegisterForm from "../../components/RegisterForm";
 import LoginForm from "../../components/LoginForm";
 import Banner from "../../components/Banner";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className="w-full flex justify-center">
       <div className="flex flex-col items-center mt-16 w-10/12 max-w-3xl">
@@ -15,14 +15,14 @@ const LoginPage = () => {
         <Image className="w-20 h-20 z-20" src={logo} alt="" />
         <h1 className="text-4xl mb-8">DryTix</h1>
         <p className="text-l mb-4">
-          Clean Team, Welcome to your dashboard login!
+          Welcome to DryTix! Register your business to get started.
         </p>
 
-        <LoginForm />
+        <RegisterForm />
       </div>
       <ToastContainer />
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
