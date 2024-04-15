@@ -23,7 +23,7 @@ const TeamPage = () => {
             picture={"/img/isaac.jpg"}
             name={"Isaac Weaver (CTO)"}
             statement={
-              "I'm a mechanicla engineering major at Brigham Young University with a minor in computer science. I love the outdoors, technology, and pickleball"
+              "I'm a mechanical engineering major at Brigham Young University with a minor in computer science. I love the outdoors, technology, and pickleball"
             }
             hometown={"Olney, MD"}
           />
